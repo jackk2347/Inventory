@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-light">
+        <h1> Hello user
+            <%= userid %>
+        </h1>
+        <p style="color: red">
+            Showing
+            <%=inventory_length%> documents . </p>
+        <a href="/logout" class="btn btn-danger">Logout </a>
+    </nav>
+    <h2>Home page</h2>
+    <div class="table-wrapper">
+
+        <input type="text" id="myInput" onkeyup="Filter()" placeholder="Search inventory name">
+        <a href="/create" class="btn btn-success">Create</a>
+        <table class="fl-table" id="Inv_table">
+            <thead>
+                <tr>
+                    <th>ID </th>
+                    <th>Inventory Name </th>
+                    <th>Inventory type </th>
+                    <th>quantity</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% for (var i of inventory) {%>
+                    <tr>
+                        <td>
+                            <%=i.inv_id %>
+                        </td>
+                        <td>
+                            <a href="/detail?_id=<%=i ._id %>">
+                                <%=i .name %>
+                            </a>
+                        </td>
+                        <td>
+                            <%= i.type %>
+                        </td>
+                        <td>
+                            <%= i.quantity %>
+                        </td>
+                        <td>
+                            <a href="/edit?_id=<%= i._id %>" class="btn btn-outline-primary" role="button">Edit</a>
+                        </td>
+                        <td>
+                            <a href="/delete?_id=<%= i._id %>&owner=<%= i.owner %>" class="btn btn-outline-danger" role="button">Delete</a>
+                        </td>
+                    </tr>
+                    <% } %>
+                        <tbody>
+        </table>
+    </div>
+    <script>
+        function Filter() {
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("Inv_table");
+            tr = table.getElementsByTagName("tr");
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[1];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

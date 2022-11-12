@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Update Inventory</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <h1>Update Inventory</h1>
+        <p>Owner :
+            <%= inventory.owner %>
+        </p> <br>
+    </nav>
+    <form method="POST" action="/update" enctype="multipart/form-data">
+        <div class="form-group row">
+            <label for="Inventory ID" class="col-sm-2 col-form-label">Inventory ID :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="inv_id" name="inv_id" placeholder="Ivnentory ID" value=<% if (inventory.inv_id) { %>
+                <%= inventory.inv_id %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="name" class="col-sm-2 col-form-label">Name</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="name" name="name" placeholder="name" value=<% if (inventory.name) { %>
+                <%= inventory.name %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="type" class="col-sm-2 col-form-label">Type</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="type" id="type" placeholder="type" value=<% if (inventory.type) { %>
+                <%= inventory.type %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="quantity" class="col-sm-2 col-form-label">Quantity</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" name="quantity" id=" quantity " placeholder="quantity " value=<% if (inventory.quantity) { %>
+                <%= inventory.quantity %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row ">
+            <label for="street " class="col-sm-2 col-form-label ">Street</label>
+            <div class="col-sm-10 ">
+                <input type="text " class="form-control " name="street" id="street " placeholder="street " value=<% if (inventory.address.street) { %>
+                <%= inventory.address.street %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row ">
+            <label for="building " class="col-sm-2 col-form-label ">Building</label>
+            <div class="col-sm-10 ">
+                <input type="text " class="form-control " name="building" id="building" placeholder="building " value=<% if (inventory.address.building) { %>
+                <%= inventory.address.building %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row ">
+            <label for="country " class="col-sm-2 col-form-label ">Country</label>
+            <div class="col-sm-10 ">
+                <input type="text " class="form-control " name="country" id="country" placeholder="country " value=<% if (inventory.address.country) { %>
+                <%= inventory.address.country %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row ">
+            <label for="zipcode " class="col-sm-2 col-form-label ">Zipcode</label>
+            <div class="col-sm-10 ">
+                <input type="text " class="form-control " name="zipcode" id="zipcode" placeholder="zipcode " value=<% if (inventory.address.zipcode) { %>
+                <%= inventory.address.zipcode %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row ">
+            <label for="latitude " class="col-sm-2 col-form-label ">GPS Latitude:</label>
+            <div class="col-sm-10 ">
+                <input type="text " class="form-control " name="latitude" id="latitude" placeholder="Latitude " value=<% if (inventory.address.coord[0]) { %>
+                <%= inventory.address.coord[0] %>
+                    <% } %>required>
+            </div>
+        </div>
+        <div class="form-group row ">
+            <label for="longitude " class="col-sm-2 col-form-label ">GPS Longitude</label>
+            <div class="col-sm-10 ">
+                <input type="text " class="form-control " name="longitude" id="longitude" placeholder="Longitude " value=<% if (inventory.address.coord[1]) { %>
+                <%= inventory.address.coord[1] %>
+                    <% } %>required>
+            </div>
+        </div>
+
+        <div class="form-group row ">
+            <div class="custom-file">
+                <label class="custom-file-label" for="photo">Update New Photo:</label>
+                <div class="row">
+                    <% if (inventory.photo) { %>
+                        <img src="data:image/<%= inventory.photo.mimetype %>;base64, <%= inventory.photo.data %>" alt="<%= inventory.photo.title %>" class="img-thumbnail"><br>
+                        <% } %>
+                </div>
+                <input type="file" id="photo" name="photo" class="form-control custom-file-input" placeholder="Photo" accept=".jpeg,.png"><br>
+
+            </div>
+        </div>
+        <input type="hidden" name="_id" id="_id" value=<%=inventory._id %>>
+        <input type="hidden" name="owner" id="owener" value=<%=inventory.owner %>
+
+        <div class="form-group row ">
+            <div class="col-sm-10 ">
+                <button type="submit " class="btn btn-primary " value="update">  Update </button>
+            </div>
+        </div>
+
+        </div>
+
+    </form>
+</body>
+<script>
+    $(".custom-file-input").on("change", function() {
+        var fileName = $(this).val().split("\\").pop();
+        $(this).siblings(".custom-file-label").addClass("selected").html(fileName);
+    });
+</script>
+
+</html>

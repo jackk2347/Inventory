@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Detail</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="home.css">
+    <script>
+        function back() {
+            window.history.back();
+        }
+    </script>
+</head>
+
+<body>
+    <div class="table-wrapper">
+        <table class="fl-table">
+            <thead>
+                <tr>
+                    <th>
+                        <h1>Detail of
+                            <%= inventory.name %>
+                        </h1>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <% if (inventory.photo) { %>
+                            <img src="data:image/<%= inventory.photo.mimetype%>;base64 , <%=inventory.photo.data %>"> <br>
+                            <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Inventory ID :
+                        <% if (typeof(inventory.inv_id) !== "underfined") {%>
+                            <%=inventory.inv_id %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Type :
+                        <% if (typeof(inventory.type) !== "underfined") {%>
+                            <%=inventory.type %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Quantity :
+                        <% if (typeof(inventory.quantity) !== "underfined") {%>
+                            <%=inventory.quantity %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Quantity :
+                        <% if (typeof(inventory.quantity) !== "underfined") {%>
+                            <%=inventory.quantity %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Streeet :
+                        <% if (typeof(inventory.address.street) !== "underfined") {%>
+                            <%=inventory.address.street %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Building :
+                        <% if (typeof(inventory.address.building) !== "underfined") {%>
+                            <%=inventory.address.building %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Country :
+                        <% if (typeof(inventory.address.country) !== "underfined") {%>
+                            <%=inventory.address.country %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Zipcode :
+                        <% if (typeof(inventory.address.zipcode) !== "underfined") {%>
+                            <%=inventory.address.zipcode %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        GPS :
+                        <% if (typeof(inventory.address.coord) !== "underfined") {%>
+                            <%=inventory.address.coord %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Manager :
+                        <% if (typeof(inventory.owner) !== "underfined") {%>
+                            <%=inventory.owner %>
+                                <% } %>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>
+                            <a href="/edit?_id=<%= inventory._id %>" class="btn btn-outline-primary" role="button">Edit</a>
+                            <a href="/delete?_id=<%= inventory._id %>&owner=<%= inventory.owner %>" class="btn btn-outline-danger" role="button">Delete</a>
+                            <button class="btn btn-outline-success" onclick="back()">Back</button> </p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </br>
+
+</body>
+
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>inventory</title>
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+    <div id="login-form-wrap">
+        <h2>Inventory Login</h2>
+        <form id="login-form" action="/login" method="post">
+            <p>
+                <input type="text" id="userid" name="userid" placeholder="Userid" required><i class="validation"><span></span><span></span></i>
+            </p>
+            <p>
+                <input type="password" id="password" name="password" placeholder="Password"><i class="validation"><span></span><span></span></i>
+            </p>
+            <p>
+                <input type="submit" id="login" value="Login">
+            </p>
+        </form>
+        <div id="create-account-wrap">
+        </div>
+    </div>
+    <%- include('footer'); -%>
+</body>
+
+</html>
